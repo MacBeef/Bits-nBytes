@@ -1,17 +1,22 @@
 int bitNum;
 char randomChar;
 String randomString;
+int strLength;
+boolean reset;
+
+
 
 void setup() {
   bitNum = 0;
   randomChar = ' ';
   randomString = "";
+  strLength = int(random(2, 11));
 
   print("Her har vi en byte:  ");
   byteMaker();
 
   print("Her har vi en character:  ");
-  charMaker();
+  charMaker(true);
 
   print("Her har vi en string:  ");
   stringMaker();
@@ -40,19 +45,28 @@ void byteMaker() {
   bitNum = 0;
 }
 
-void charMaker() {
+void charMaker(boolean print) {
   forBitMine();
   randomChar = char(bitNum);
-  println(randomChar);
-  bitNum = 0;
+  if (reset) {
+    bitNum = 0;
+  }
+  if (print) {
+    println(randomChar);
+  }
 }
 
 void stringMaker() {
-  for (int i = 0; i < 4; i++) {
-    forBitMine();
-    randomString = randomString + char(bitNum);
+  reset = false;
+  for (int i = 0; i < strLength; i++) {
+    charMaker(false);
+    randomString = randomString + randomChar;
+    reset = true;
     bitNum = 0;
   }
   println(randomString);
   randomString = "";
+}
+
+void intMaker() {
 }
