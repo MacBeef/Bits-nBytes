@@ -13,7 +13,7 @@ void setup() {
   strLength = int(random(2, 11));
 
   print("Her har vi en byte:  ");
-  byteMaker();
+  byteMaker(true);
 
   print("Her har vi en character:  ");
   charMaker(true);
@@ -31,22 +31,21 @@ boolean bitMine() {
   return false;
 }
 
-void forBitMine() {
+void byteMaker(boolean print) {
   for (int i = 0; i < 8; i++) {
     if (bitMine()==true) {
       bitNum = bitNum + int(pow(2, i));
     }
   }
+  if (print) {
+    println(bitNum);
+    bitNum = 0;
+  }
 }
 
-void byteMaker() {
-  forBitMine();
-  println(bitNum);
-  bitNum = 0;
-}
 
 void charMaker(boolean print) {
-  forBitMine();
+  byteMaker(false);
   randomChar = char(bitNum);
   if (reset) {
     bitNum = 0;
