@@ -1,11 +1,22 @@
-int res = 0;
-char rand;
+int bitNum;
+char randomChar;
+String randomString;
 
 void setup() {
+  bitNum = 0;
+  randomChar = ' ';
+  randomString = "";
+
+  print("Her har vi en byte:  ");
+  byteMaker();
+
+  print("Her har vi en character:  ");
+  charMaker();
+
+  print("Her har vi en string:  ");
+  stringMaker();
 }
 void draw() {
-  byteMaker();
-  charMaker();
 }
 
 boolean bitMine() {
@@ -18,26 +29,30 @@ boolean bitMine() {
 void forBitMine() {
   for (int i = 0; i < 8; i++) {
     if (bitMine()==true) {
-      res = res + int(pow(2, i));
+      bitNum = bitNum + int(pow(2, i));
     }
   }
 }
 
 void byteMaker() {
   forBitMine();
-  println(res);
-  res = 0;
+  println(bitNum);
+  bitNum = 0;
 }
 
 void charMaker() {
   forBitMine();
-  rand = char(res);
-  println(rand);
-  res = 0;
+  randomChar = char(bitNum);
+  println(randomChar);
+  bitNum = 0;
 }
 
 void stringMaker() {
-  forBitMine();
-  print(res);
-  res = 0;
+  for (int i = 0; i < 4; i++) {
+    forBitMine();
+    randomString = randomString + char(bitNum);
+    bitNum = 0;
+  }
+  println(randomString);
+  randomString = "";
 }
