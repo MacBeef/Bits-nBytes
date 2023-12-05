@@ -11,64 +11,55 @@ void setup() {
   randomChar = ' ';
   randomString = "";
   strLength = int(random(2, 11));
+  
+  byteMaker();
+  println("Her har vi en byte:  " + bitNum);
 
-  print("Her har vi en byte:  ");
-  byteMaker(true);
-
-  print("Her har vi en character:  ");
-  charMaker(true);
-
-  print("Her har vi en string:  ");
-  stringMaker(true);
+  charMaker();
+  println("Her har vi en character:  " + randomChar);
+  
+  stringMaker();
+  println("Her har vi en string:  " + randomString);
+  
 }
 void draw() {
 }
 
 boolean bitMine() {
-  if (random(0, 2) > 1) {
-    return true;
-  }
-  return false;
+  return random(0, 2) < 1;
 }
 
-void byteMaker(boolean print) {
-  for (int i = 0; i < 8; i++) {
-    if (bitMine()==true) {
-      bitNum = bitNum + int(pow(2, i));
+byte byteMaker() {
+  for (int i = 7; i > 0; i--) {
+    if (bitMine()) {
+      bitNum += int(pow(2, i));
     }
   }
-  if (print) {
-    println(bitNum);
-    bitNum = 0;
-  }
+  return byte(bitNum);
 }
 
 
-void charMaker(boolean print) {
-  byteMaker(false);
-  randomChar = char(bitNum);
+char charMaker() {
+  byteMaker();
+  randomChar = char((bitNum));
   if (reset) {
     bitNum = 0;
   }
-  if (print) {
-    println(randomChar);
-  }
+  return randomChar;
 }
 
-void stringMaker(boolean print) {
+
+String stringMaker() {
   reset = false;
   for (int i = 0; i < strLength; i++) {
-    charMaker(false);
-    randomString = randomString + randomChar;
+    charMaker();
+    randomString += randomChar;
     reset = true;
     bitNum = 0;
   }
-  if (print) {
-    println(randomString);
-    randomString = "";
-  }
+  return randomString;
 }
 
-void intMaker(){
+int intMaker() {
   
 }
