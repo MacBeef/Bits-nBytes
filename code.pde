@@ -19,7 +19,7 @@ void setup() {
   charMaker(true);
 
   print("Her har vi en string:  ");
-  stringMaker();
+  stringMaker(true);
 }
 void draw() {
 }
@@ -55,7 +55,7 @@ void charMaker(boolean print) {
   }
 }
 
-void stringMaker() {
+void stringMaker(boolean print) {
   reset = false;
   for (int i = 0; i < strLength; i++) {
     charMaker(false);
@@ -63,9 +63,12 @@ void stringMaker() {
     reset = true;
     bitNum = 0;
   }
-  println(randomString);
-  randomString = "";
+  if (print) {
+    println(randomString);
+    randomString = "";
+  }
 }
 
-void intMaker() {
+void intMaker(){
+  
 }
